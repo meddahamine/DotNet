@@ -18,12 +18,8 @@ namespace ProjetDotNet.Models
         [Display(Name = "Periode")]
         public Guid Period_Id { get; set; }
 
-<<<<<<< HEAD
-        [Display(Name = "Date")]
-        [DataType(DataType.DateTime)]
-=======
         [Display(Name = "Date Evaluation")]
->>>>>>> e3b031b198d92039729ece33d2b15b02db295eb4
+        [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
 
         [Display(Name = "Point total")]
