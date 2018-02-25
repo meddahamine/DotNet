@@ -3,10 +3,8 @@ namespace ProjetDotNet.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
-    public partial class Classrooms
+    public class Classrooms
     {
         
         public Classrooms()
@@ -22,12 +20,15 @@ namespace ProjetDotNet.Models
         [Display(Name = "Classe")]
         public string Title { get; set; }
 
+        [Required]
         [Display(Name = "Utilisateur")]
         public Guid User_Id { get; set; }
 
+        [Required]
         [Display(Name = "Année")]
         public Guid Year_Id { get; set; }
 
+        [Required]
         [Display(Name = "Etablissement")]
         public Guid Establishment_Id { get; set; }
 
@@ -36,8 +37,7 @@ namespace ProjetDotNet.Models
         public virtual Users Users { get; set; }
 
         public virtual Years Years { get; set; }
-
-        
+                
         public virtual ICollection<Evaluations> Evaluations { get; set; }
 
         

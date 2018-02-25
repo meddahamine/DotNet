@@ -43,7 +43,7 @@ namespace ProjetDotNet.Controllers
         public ActionResult Create()
         {
             ViewBag.Classroom_Id = new SelectList(evaluationsRepository.GetAcademy().Classrooms, "Id", "Title");
-            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Id");
+            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Begin");
             ViewBag.User_Id = new SelectList(evaluationsRepository.GetAcademy().Users, "Id", "UserName");
             return View();
         }
@@ -61,7 +61,7 @@ namespace ProjetDotNet.Controllers
             }
 
             ViewBag.Classroom_Id = new SelectList(evaluationsRepository.GetAcademy().Classrooms, "Id", "Title", evaluations.Classroom_Id);
-            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Id", evaluations.Period_Id);
+            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Begin", evaluations.Period_Id);
             ViewBag.User_Id = new SelectList(evaluationsRepository.GetAcademy().Users, "Id", "UserName", evaluations.User_Id);
             return View(evaluations);
         }
@@ -78,7 +78,7 @@ namespace ProjetDotNet.Controllers
                 return HttpNotFound();
             }
             ViewBag.Classroom_Id = new SelectList(evaluationsRepository.GetAcademy().Classrooms, "Id", "Title", evaluations.Classroom_Id);
-            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Id", evaluations.Period_Id);
+            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Begin", evaluations.Period_Id);
             ViewBag.User_Id = new SelectList(evaluationsRepository.GetAcademy().Users, "Id", "UserName", evaluations.User_Id);
             return View(evaluations);
         }
@@ -94,7 +94,7 @@ namespace ProjetDotNet.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Classroom_Id = new SelectList(evaluationsRepository.GetAcademy().Classrooms, "Id", "Title", evaluations.Classroom_Id);
-            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Id", evaluations.Period_Id);
+            ViewBag.Period_Id = new SelectList(evaluationsRepository.GetAcademy().Periods, "Id", "Begin", evaluations.Period_Id);
             ViewBag.User_Id = new SelectList(evaluationsRepository.GetAcademy().Users, "Id", "UserName", evaluations.User_Id);
             return View(evaluations);
         }
