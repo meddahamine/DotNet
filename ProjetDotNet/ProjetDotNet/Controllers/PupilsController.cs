@@ -1,24 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ProjetDotNet.Models;
+using ProjetDotNet.Repositories;
 
 namespace ProjetDotNet.Controllers
 {
     public class PupilsController : Controller
     {
-        private Academy db = new Academy();
+        private PupilsRepository pupilsRepository;
+
+        public PupilsController()
+        {
+            this.pupilsRepository = new PupilsRepository(new Academy());
+        }
+
+        public PupilsController(PupilsRepository pupilsRepository)
+        {
+            this.pupilsRepository = pupilsRepository;
+        }
 
         // GET: Pupils
         public ActionResult Index()
         {
-            var pupils = db.Pupils.Include(p => p.Classrooms).Include(p => p.Levels).Include(p => p.Tutors);
-            return View(pupils.ToList());
+            return View(pupilsRepository.GetPupils());
         }
 
         // GET: Pupils/Details/5
@@ -28,7 +34,7 @@ namespace ProjetDotNet.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pupils pupils = db.Pupils.Find(id);
+            Pupils pupils = pupilsRepository.GetPupilsById(id);
             if (pupils == null)
             {
                 return HttpNotFound();
@@ -39,9 +45,9 @@ namespace ProjetDotNet.Controllers
         // GET: Pupils/Create
         public ActionResult Create()
         {
-            ViewBag.Classroom_Id = new SelectList(db.Classrooms, "Id", "Title");
-            ViewBag.Level_Id = new SelectList(db.Levels, "Id", "Title");
-            ViewBag.Tutor_Id = new SelectList(db.Tutors, "Id", "LastName");
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title");
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title");
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName");
             return View();
         }
 
@@ -55,14 +61,14 @@ namespace ProjetDotNet.Controllers
             if (ModelState.IsValid)
             {
                 pupils.Id = Guid.NewGuid();
-                db.Pupils.Add(pupils);
-                db.SaveChanges();
+                pupilsRepository.AddPupils(pupils);
+                pupilsRepository.Save();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Classroom_Id = new SelectList(db.Classrooms, "Id", "Title", pupils.Classroom_Id);
-            ViewBag.Level_Id = new SelectList(db.Levels, "Id", "Title", pupils.Level_Id);
-            ViewBag.Tutor_Id = new SelectList(db.Tutors, "Id", "LastName", pupils.Tutor_Id);
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title", pupils.Classroom_Id);
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title", pupils.Level_Id);
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName", pupils.Tutor_Id);
             return View(pupils);
         }
 
@@ -73,14 +79,14 @@ namespace ProjetDotNet.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pupils pupils = db.Pupils.Find(id);
+            Pupils pupils = pupilsRepository.GetPupilsById(id);
             if (pupils == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Classroom_Id = new SelectList(db.Classrooms, "Id", "Title", pupils.Classroom_Id);
-            ViewBag.Level_Id = new SelectList(db.Levels, "Id", "Title", pupils.Level_Id);
-            ViewBag.Tutor_Id = new SelectList(db.Tutors, "Id", "LastName", pupils.Tutor_Id);
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title", pupils.Classroom_Id);
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title", pupils.Level_Id);
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName", pupils.Tutor_Id);
             return View(pupils);
         }
 
@@ -93,13 +99,13 @@ namespace ProjetDotNet.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pupils).State = EntityState.Modified;
-                db.SaveChanges();
+                pupilsRepository.SetEntryState(pupils, EntityState.Modified);
+                pupilsRepository.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.Classroom_Id = new SelectList(db.Classrooms, "Id", "Title", pupils.Classroom_Id);
-            ViewBag.Level_Id = new SelectList(db.Levels, "Id", "Title", pupils.Level_Id);
-            ViewBag.Tutor_Id = new SelectList(db.Tutors, "Id", "LastName", pupils.Tutor_Id);
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title", pupils.Classroom_Id);
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title", pupils.Level_Id);
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName", pupils.Tutor_Id);
             return View(pupils);
         }
 
@@ -110,7 +116,7 @@ namespace ProjetDotNet.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pupils pupils = db.Pupils.Find(id);
+            Pupils pupils = pupilsRepository.GetPupilsById(id);
             if (pupils == null)
             {
                 return HttpNotFound();
@@ -123,9 +129,9 @@ namespace ProjetDotNet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Pupils pupils = db.Pupils.Find(id);
-            db.Pupils.Remove(pupils);
-            db.SaveChanges();
+            Pupils pupils = pupilsRepository.GetPupilsById(id);
+            pupilsRepository.Remove(pupils);
+            pupilsRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -133,7 +139,7 @@ namespace ProjetDotNet.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                pupilsRepository.Dispose();
             }
             base.Dispose(disposing);
         }
