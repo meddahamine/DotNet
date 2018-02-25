@@ -3,17 +3,10 @@ namespace ProjetDotNet.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    public partial class Pupils
+    
+    public class Pupils
     {
         
-        public Pupils()
-        {
-            Results = new HashSet<Results>();
-        }
-
         public Guid Id { get; set; }
 
         [Required]
@@ -30,6 +23,7 @@ namespace ProjetDotNet.Models
         public short Sex { get; set; }
 
         [Display(Name = "Date de naissance")]
+        [DataType(DataType.DateTime)]
         public DateTime BirthdayDate { get; set; }
 
         [Display(Name = "State")]
@@ -50,7 +44,11 @@ namespace ProjetDotNet.Models
 
         public virtual Tutors Tutors { get; set; }
 
-        
         public virtual ICollection<Results> Results { get; set; }
+
+        public Pupils()
+        {
+            Results = new HashSet<Results>();
+        }
     }
 }

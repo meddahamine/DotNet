@@ -4,16 +4,9 @@ namespace ProjetDotNet.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Users
+    public class Users
     {
         
-        public Users()
-        {
-            Classrooms = new HashSet<Classrooms>();
-            Establishments = new HashSet<Establishments>();
-            Evaluations = new HashSet<Evaluations>();
-        }
-
         public Guid Id { get; set; }
 
         [Required]
@@ -38,17 +31,21 @@ namespace ProjetDotNet.Models
         public string LastName { get; set; }
 
         [StringLength(50)]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail non valide")]
         [Display(Name = "Email")]
         public string Mail { get; set; }
 
-        
         public virtual ICollection<Classrooms> Classrooms { get; set; }
 
-        
         public virtual ICollection<Establishments> Establishments { get; set; }
 
-        
         public virtual ICollection<Evaluations> Evaluations { get; set; }
+
+        public Users()
+        {
+            Classrooms = new HashSet<Classrooms>();
+            Establishments = new HashSet<Establishments>();
+            Evaluations = new HashSet<Evaluations>();
+        }
     }
 }

@@ -3,10 +3,8 @@ namespace ProjetDotNet.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    public partial class Results
+    
+    public class Results
     {
         public Guid Id { get; set; }
 

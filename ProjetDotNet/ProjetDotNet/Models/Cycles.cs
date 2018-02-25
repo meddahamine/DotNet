@@ -7,11 +7,6 @@ namespace ProjetDotNet.Models
     public class Cycles
     {
         
-        public Cycles()
-        {
-            Levels = new HashSet<Levels>();
-        }
-
         public Guid Id { get; set; }
 
         [Required]
@@ -20,5 +15,10 @@ namespace ProjetDotNet.Models
         public string Title { get; set; }
         
         public virtual ICollection<Levels> Levels { get; set; }
+
+        public Cycles()
+        {
+            Levels = new HashSet<Levels>();
+        }
     }
 }

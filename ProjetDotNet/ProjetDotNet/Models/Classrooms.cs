@@ -7,12 +7,6 @@ namespace ProjetDotNet.Models
     public class Classrooms
     {
         
-        public Classrooms()
-        {
-            Evaluations = new HashSet<Evaluations>();
-            Pupils = new HashSet<Pupils>();
-        }
-
         public Guid Id { get; set; }
 
         [Required]
@@ -40,7 +34,12 @@ namespace ProjetDotNet.Models
                 
         public virtual ICollection<Evaluations> Evaluations { get; set; }
 
-        
         public virtual ICollection<Pupils> Pupils { get; set; }
+
+        public Classrooms()
+        {
+            Evaluations = new HashSet<Evaluations>();
+            Pupils = new HashSet<Pupils>();
+        }
     }
 }

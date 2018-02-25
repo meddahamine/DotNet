@@ -3,17 +3,10 @@ namespace ProjetDotNet.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
-    public partial class Evaluations
+    public class Evaluations
     {
         
-        public Evaluations()
-        {
-            Results = new HashSet<Results>();
-        }
-
         public Guid Id { get; set; }
 
         [Display(Name = "Classe")]
@@ -25,7 +18,12 @@ namespace ProjetDotNet.Models
         [Display(Name = "Periode")]
         public Guid Period_Id { get; set; }
 
+<<<<<<< HEAD
+        [Display(Name = "Date")]
+        [DataType(DataType.DateTime)]
+=======
         [Display(Name = "Date Evaluation")]
+>>>>>>> e3b031b198d92039729ece33d2b15b02db295eb4
         public DateTime Date { get; set; }
 
         [Display(Name = "Point total")]
@@ -37,7 +35,11 @@ namespace ProjetDotNet.Models
 
         public virtual Users Users { get; set; }
 
-        
         public virtual ICollection<Results> Results { get; set; }
+
+        public Evaluations()
+        {
+            Results = new HashSet<Results>();
+        }
     }
 }

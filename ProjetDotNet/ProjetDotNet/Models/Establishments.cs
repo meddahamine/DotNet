@@ -3,17 +3,10 @@ namespace ProjetDotNet.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    public partial class Establishments
+    
+    public class Establishments
     {
         
-        public Establishments()
-        {
-            Classrooms = new HashSet<Classrooms>();
-        }
-
         public Guid Id { get; set; }
 
         [Required]
@@ -28,6 +21,7 @@ namespace ProjetDotNet.Models
 
         [Required]
         [StringLength(50)]
+        [DataType(DataType.PostalCode)]
         [Display(Name = "Code postal")]
         public string PostCode { get; set; }
 
@@ -44,9 +38,13 @@ namespace ProjetDotNet.Models
 
         public virtual Academies Academies { get; set; }
 
-        
         public virtual ICollection<Classrooms> Classrooms { get; set; }
 
         public virtual Users Users { get; set; }
+
+        public Establishments()
+        {
+            Classrooms = new HashSet<Classrooms>();
+        }
     }
 }

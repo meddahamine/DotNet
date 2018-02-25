@@ -7,11 +7,6 @@ namespace ProjetDotNet.Models
     public class Academies
     {
         
-        public Academies()
-        {
-            Establishments = new HashSet<Establishments>();
-        }
-
         public Guid Id { get; set; }
 
         [Required]
@@ -19,7 +14,11 @@ namespace ProjetDotNet.Models
         [Display(Name = "Academie")]
         public string Name { get; set; }
 
-        
         public ICollection<Establishments> Establishments { get; set; }
+
+        public Academies()
+        {
+            Establishments = new HashSet<Establishments>();
+        }
     }
 }
