@@ -182,7 +182,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AcademiesRepository.cs" />
     <Compile Include="Repositories\ClassroomsRepository.cs" />
+    <Compile Include="Repositories\CyclesRepository.cs" />
+    <Compile Include="Repositories\EstablishmentsRepository.cs" />
+    <Compile Include="Repositories\EvaluationsRepository.cs" />
+    <Compile Include="Repositories\LevelsRepository.cs" />
+    <Compile Include="Repositories\PeriodsRepository.cs" />
     <Compile Include="Repositories\PupilsRepository.cs" />
+    <Compile Include="Repositories\ResultsRepository.cs" />
+    <Compile Include="Repositories\TutorsRepository.cs" />
+    <Compile Include="Repositories\UsersRepository.cs" />
+    <Compile Include="Repositories\YearsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Academy.mdf" />

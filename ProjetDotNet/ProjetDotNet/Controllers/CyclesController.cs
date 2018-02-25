@@ -1,33 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ProjetDotNet.Models;
+using ProjetDotNet.Repositories;
 
 namespace ProjetDotNet.Controllers
 {
     public class CyclesController : Controller
     {
-        private Academy db = new Academy();
+        private CyclesRepository cyclesRepository;
 
-        // GET: Cycles
-        public ActionResult Index()
+        public CyclesController()
         {
-            return View(db.Cycles.ToList());
+            this.cyclesRepository = new CyclesRepository(new Academy());
         }
 
-        // GET: Cycles/Details/5
+        public CyclesController(CyclesRepository cyclesRepository)
+        {
+            this.cyclesRepository = cyclesRepository;
+        }
+
+        public ActionResult Index()
+        {
+            return View(cyclesRepository.GetAll());
+        }
+
         public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cycles cycles = db.Cycles.Find(id);
+            Cycles cycles = cyclesRepository.GetById(id);
             if (cycles == null)
             {
                 return HttpNotFound();
@@ -35,15 +40,11 @@ namespace ProjetDotNet.Controllers
             return View(cycles);
         }
 
-        // GET: Cycles/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cycles/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title")] Cycles cycles)
@@ -51,22 +52,21 @@ namespace ProjetDotNet.Controllers
             if (ModelState.IsValid)
             {
                 cycles.Id = Guid.NewGuid();
-                db.Cycles.Add(cycles);
-                db.SaveChanges();
+                cyclesRepository.Add(cycles);
+                cyclesRepository.Save();
                 return RedirectToAction("Index");
             }
 
             return View(cycles);
         }
 
-        // GET: Cycles/Edit/5
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cycles cycles = db.Cycles.Find(id);
+            Cycles cycles = cyclesRepository.GetById(id);
             if (cycles == null)
             {
                 return HttpNotFound();
@@ -74,30 +74,26 @@ namespace ProjetDotNet.Controllers
             return View(cycles);
         }
 
-        // POST: Cycles/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title")] Cycles cycles)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cycles).State = EntityState.Modified;
-                db.SaveChanges();
+                cyclesRepository.SetEntryState(cycles, EntityState.Modified);
+                cyclesRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(cycles);
         }
 
-        // GET: Cycles/Delete/5
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cycles cycles = db.Cycles.Find(id);
+            Cycles cycles = cyclesRepository.GetById(id);
             if (cycles == null)
             {
                 return HttpNotFound();
@@ -105,24 +101,14 @@ namespace ProjetDotNet.Controllers
             return View(cycles);
         }
 
-        // POST: Cycles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Cycles cycles = db.Cycles.Find(id);
-            db.Cycles.Remove(cycles);
-            db.SaveChanges();
+            Cycles cycles = cyclesRepository.GetById(id);
+            cyclesRepository.Remove(cycles);
+            cyclesRepository.Save();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        }        
     }
 }

@@ -1,33 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ProjetDotNet.Models;
+using ProjetDotNet.Repositories;
 
 namespace ProjetDotNet.Controllers
 {
     public class YearsController : Controller
     {
-        private Academy db = new Academy();
+        private YearsRepository yearsRepository;
 
-        // GET: Years
-        public ActionResult Index()
+        public YearsController()
         {
-            return View(db.Years.ToList());
+            this.yearsRepository = new YearsRepository(new Academy());
         }
 
-        // GET: Years/Details/5
+        public YearsController(YearsRepository yearsRepository)
+        {
+            this.yearsRepository = yearsRepository;
+        }
+
+        public ActionResult Index()
+        {
+            return View(yearsRepository.GetAll());
+        }
+
         public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Years years = db.Years.Find(id);
+            Years years = yearsRepository.GetById(id);
             if (years == null)
             {
                 return HttpNotFound();
@@ -35,15 +40,11 @@ namespace ProjetDotNet.Controllers
             return View(years);
         }
 
-        // GET: Years/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Years/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Year")] Years years)
@@ -51,22 +52,21 @@ namespace ProjetDotNet.Controllers
             if (ModelState.IsValid)
             {
                 years.Id = Guid.NewGuid();
-                db.Years.Add(years);
-                db.SaveChanges();
+                yearsRepository.Add(years);
+                yearsRepository.Save();
                 return RedirectToAction("Index");
             }
 
             return View(years);
         }
 
-        // GET: Years/Edit/5
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Years years = db.Years.Find(id);
+            Years years = yearsRepository.GetById(id);
             if (years == null)
             {
                 return HttpNotFound();
@@ -74,30 +74,26 @@ namespace ProjetDotNet.Controllers
             return View(years);
         }
 
-        // POST: Years/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Year")] Years years)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(years).State = EntityState.Modified;
-                db.SaveChanges();
+                yearsRepository.SetEntryState(years, EntityState.Modified);
+                yearsRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(years);
         }
 
-        // GET: Years/Delete/5
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Years years = db.Years.Find(id);
+            Years years = yearsRepository.GetById(id);
             if (years == null)
             {
                 return HttpNotFound();
@@ -105,24 +101,15 @@ namespace ProjetDotNet.Controllers
             return View(years);
         }
 
-        // POST: Years/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Years years = db.Years.Find(id);
-            db.Years.Remove(years);
-            db.SaveChanges();
+            Years years = yearsRepository.GetById(id);
+            yearsRepository.Remove(years);
+            yearsRepository.Save();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

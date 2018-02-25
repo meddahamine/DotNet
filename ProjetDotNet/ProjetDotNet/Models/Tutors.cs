@@ -32,7 +32,7 @@ namespace ProjetDotNet.Models
         public string Address { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [DataType(DataType.PostalCode)]
         [Display(Name = "Code postal")]
         public string PostCode { get; set; }
 
@@ -43,11 +43,14 @@ namespace ProjetDotNet.Models
 
         [Required]
         [StringLength(50)]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         [Display(Name = "Telephone")]
         public string Tel { get; set; }
 
         [Required]
         [StringLength(50)]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         [Display(Name = "Email")]
         public string Mail { get; set; }
 
