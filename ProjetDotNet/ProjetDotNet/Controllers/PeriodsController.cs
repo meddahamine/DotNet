@@ -73,7 +73,7 @@ namespace ProjetDotNet.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Year_Id = new SelectList(periodsRepository.GetAcademy().Years, "Id", "Id", periods.Year_Id);
+            ViewBag.Year_Id = new SelectList(periodsRepository.GetAcademy().Years, "Id", "Year", periods.Year_Id);
             return View(periods);
         }
 
