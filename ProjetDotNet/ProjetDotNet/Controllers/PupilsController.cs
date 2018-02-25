@@ -33,6 +33,7 @@ namespace ProjetDotNet.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Pupils pupils = pupilsRepository.GetById(id);
+            
             if (pupils == null)
             {
                 return HttpNotFound();
