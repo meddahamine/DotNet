@@ -33,6 +33,16 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Periods.End)
+        </dt>
+
+        <dd>
+            <p>
+                @Html.DisplayFor(model => model.Periods.End) |
+                @Html.ActionLink("Fiche Period", "", "Periods/Details/" + Model.Period_Id)
+            </p>
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Users.UserName)
         </dt>
 
@@ -63,5 +73,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour", "Index")
 </p>

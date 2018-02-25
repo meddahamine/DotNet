@@ -25,7 +25,7 @@ namespace ProjetDotNet.Models
         [Display(Name = "Periode")]
         public Guid Period_Id { get; set; }
 
-        [Display(Name = "Date")]
+        [Display(Name = "Date Evaluation")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Point total")]

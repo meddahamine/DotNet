@@ -15,7 +15,10 @@
             @Html.DisplayNameFor(model => model.Classroom_Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Period_Id)
+            @Html.DisplayNameFor(model => model.Periods.Begin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Periods.End)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.User_Id)
@@ -38,6 +41,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Periods.Begin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Periods.End)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Users.UserName)
