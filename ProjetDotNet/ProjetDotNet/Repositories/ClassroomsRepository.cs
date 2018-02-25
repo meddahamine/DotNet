@@ -6,40 +6,40 @@ using System.Linq;
 
 namespace ProjetDotNet.Repositories
 {
-    public class PupilsRepository : IDisposable
+    public class ClassroomsRepository : IDisposable
     {
+
         private Academy db;
-
-
-        public PupilsRepository(Academy db)
+        
+        public ClassroomsRepository(Academy db)
         {
             this.db = db;
         }
 
-        public IEnumerable<Pupils> GetAll()
+        public IEnumerable<Classrooms> GetAll()
         {
-            var pupils = db.Pupils.Include(p => p.Classrooms).Include(p => p.Levels).Include(p => p.Tutors);
-            return pupils.ToList();
+            var classrooms = db.Classrooms.Include(c => c.Establishments).Include(c => c.Users).Include(c => c.Years);
+            return classrooms.ToList();
         }
 
-        public Pupils GetById(Guid? id)
+        public Classrooms GetById(Guid? id)
         {
-            return db.Pupils.Find(id);
+            return db.Classrooms.Find(id);
         }
 
-        public void Add(Pupils pupils)
+        public void Add(Classrooms classrooms)
         {
-            db.Pupils.Add(pupils);
+            db.Classrooms.Add(classrooms);
         }
 
-        public void Remove(Pupils pupils)
+        public void Remove(Classrooms classrooms)
         {
-            db.Pupils.Remove(pupils);
+            db.Classrooms.Remove(classrooms);
         }
 
-        public void SetEntryState(Pupils pupils, EntityState entityState)
+        public void SetEntryState(Classrooms classrooms, EntityState entityState)
         {
-            db.Entry(pupils).State = entityState;
+            db.Entry(classrooms).State = entityState;
         }
 
         public void Save()
@@ -71,5 +71,6 @@ namespace ProjetDotNet.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
     }
 }

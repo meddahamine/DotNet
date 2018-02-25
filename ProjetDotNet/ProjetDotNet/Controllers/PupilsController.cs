@@ -21,20 +21,18 @@ namespace ProjetDotNet.Controllers
             this.pupilsRepository = pupilsRepository;
         }
 
-        // GET: Pupils
         public ActionResult Index()
         {
-            return View(pupilsRepository.GetPupils());
+            return View(pupilsRepository.GetAll());
         }
 
-        // GET: Pupils/Details/5
         public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pupils pupils = pupilsRepository.GetPupilsById(id);
+            Pupils pupils = pupilsRepository.GetById(id);
             if (pupils == null)
             {
                 return HttpNotFound();
@@ -42,18 +40,14 @@ namespace ProjetDotNet.Controllers
             return View(pupils);
         }
 
-        // GET: Pupils/Create
         public ActionResult Create()
         {
-            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title");
-            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title");
-            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName");
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademy().Classrooms, "Id", "Title");
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademy().Levels, "Id", "Title");
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademy().Tutors, "Id", "LastName");
             return View();
         }
 
-        // POST: Pupils/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Sex,BirthdayDate,State,Tutor_Id,Classroom_Id,Level_Id")] Pupils pupils)
@@ -61,38 +55,34 @@ namespace ProjetDotNet.Controllers
             if (ModelState.IsValid)
             {
                 pupils.Id = Guid.NewGuid();
-                pupilsRepository.AddPupils(pupils);
+                pupilsRepository.Add(pupils);
                 pupilsRepository.Save();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title", pupils.Classroom_Id);
-            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title", pupils.Level_Id);
-            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName", pupils.Tutor_Id);
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademy().Classrooms, "Id", "Title", pupils.Classroom_Id);
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademy().Levels, "Id", "Title", pupils.Level_Id);
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademy().Tutors, "Id", "LastName", pupils.Tutor_Id);
             return View(pupils);
         }
 
-        // GET: Pupils/Edit/5
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pupils pupils = pupilsRepository.GetPupilsById(id);
+            Pupils pupils = pupilsRepository.GetById(id);
             if (pupils == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title", pupils.Classroom_Id);
-            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title", pupils.Level_Id);
-            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName", pupils.Tutor_Id);
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademy().Classrooms, "Id", "Title", pupils.Classroom_Id);
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademy().Levels, "Id", "Title", pupils.Level_Id);
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademy().Tutors, "Id", "LastName", pupils.Tutor_Id);
             return View(pupils);
         }
 
-        // POST: Pupils/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Sex,BirthdayDate,State,Tutor_Id,Classroom_Id,Level_Id")] Pupils pupils)
@@ -103,20 +93,19 @@ namespace ProjetDotNet.Controllers
                 pupilsRepository.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademyEntities().Classrooms, "Id", "Title", pupils.Classroom_Id);
-            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademyEntities().Levels, "Id", "Title", pupils.Level_Id);
-            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademyEntities().Tutors, "Id", "LastName", pupils.Tutor_Id);
+            ViewBag.Classroom_Id = new SelectList(pupilsRepository.GetAcademy().Classrooms, "Id", "Title", pupils.Classroom_Id);
+            ViewBag.Level_Id = new SelectList(pupilsRepository.GetAcademy().Levels, "Id", "Title", pupils.Level_Id);
+            ViewBag.Tutor_Id = new SelectList(pupilsRepository.GetAcademy().Tutors, "Id", "LastName", pupils.Tutor_Id);
             return View(pupils);
         }
 
-        // GET: Pupils/Delete/5
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pupils pupils = pupilsRepository.GetPupilsById(id);
+            Pupils pupils = pupilsRepository.GetById(id);
             if (pupils == null)
             {
                 return HttpNotFound();
@@ -124,24 +113,15 @@ namespace ProjetDotNet.Controllers
             return View(pupils);
         }
 
-        // POST: Pupils/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Pupils pupils = pupilsRepository.GetPupilsById(id);
+            Pupils pupils = pupilsRepository.GetById(id);
             pupilsRepository.Remove(pupils);
             pupilsRepository.Save();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                pupilsRepository.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

@@ -6,50 +6,45 @@ using System.Linq;
 
 namespace ProjetDotNet.Repositories
 {
-    public class PupilsRepository : IDisposable
+    public class AcademiesRepository : IDisposable
     {
+
+
         private Academy db;
 
-
-        public PupilsRepository(Academy db)
+        public AcademiesRepository(Academy db)
         {
             this.db = db;
         }
 
-        public IEnumerable<Pupils> GetAll()
+        public IEnumerable<Academies> GetAll()
         {
-            var pupils = db.Pupils.Include(p => p.Classrooms).Include(p => p.Levels).Include(p => p.Tutors);
-            return pupils.ToList();
+            return db.Academies.ToList();
         }
 
-        public Pupils GetById(Guid? id)
+        public Academies GetById(Guid? id)
         {
-            return db.Pupils.Find(id);
+            return db.Academies.Find(id);
         }
 
-        public void Add(Pupils pupils)
+        public void Add(Academies academies)
         {
-            db.Pupils.Add(pupils);
+            db.Academies.Add(academies);
         }
 
-        public void Remove(Pupils pupils)
+        public void Remove(Academies academies)
         {
-            db.Pupils.Remove(pupils);
+            db.Academies.Remove(academies);
         }
 
-        public void SetEntryState(Pupils pupils, EntityState entityState)
+        public void SetEntryState(Academies academies, EntityState entityState)
         {
-            db.Entry(pupils).State = entityState;
+            db.Entry(academies).State = entityState;
         }
 
         public void Save()
         {
             db.SaveChanges();
-        }
-
-        public Academy GetAcademy()
-        {
-            return db;
         }
 
         private bool disposed = false;
