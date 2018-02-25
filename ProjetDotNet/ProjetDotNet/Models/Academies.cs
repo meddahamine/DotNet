@@ -8,7 +8,7 @@ namespace ProjetDotNet.Models
 
     public partial class Academies
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public Academies()
         {
             Establishments = new HashSet<Establishments>();
@@ -18,9 +18,10 @@ namespace ProjetDotNet.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Academie")]
         public string Name { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Establishments> Establishments { get; set; }
     }
 }

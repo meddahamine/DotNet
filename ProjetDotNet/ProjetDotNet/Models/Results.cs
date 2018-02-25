@@ -10,10 +10,13 @@ namespace ProjetDotNet.Models
     {
         public Guid Id { get; set; }
 
+        [Display(Name = "Evaluation")]
         public Guid Evaluation_Id { get; set; }
 
+        [Display(Name = "Eleve")]
         public Guid Pupil_Id { get; set; }
 
+        [Display(Name = "Note")]
         public double Note { get; set; }
 
         public virtual Evaluations Evaluations { get; set; }

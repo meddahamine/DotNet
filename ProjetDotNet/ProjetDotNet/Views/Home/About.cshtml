@@ -1,7 +1,14 @@
 ﻿@{
     ViewBag.Title = "About";
+    ViewBag.Message = "Objectif du projet";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>@ViewBag.Title :</h2>
+<h3>@ViewBag.Message :</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>Ce projet est pour le but de réaliser une application de gestion d’élèves, de professeurs, de classes et de notes qui pourraient être implantées au ministère de l’éducation nationale. Pour réaliser cette application, nous allons utiliser le modèle de données exposée ci-dessous. Ce modèle est constitué des tables suivantes :
+-	Users : les professeurs de l’application. Ils sont associés à un établissement (Establishment) et dispensent des enseignements à plusieurs classes (Classrooms).
+-	Classrooms : les classes d’élèves de l’application. Une classe est associée à une année scolaire (Year), à un établissement (Establishment), un professeur (User), et est constitué d’un ensemble d’élèves.
+-	Pupils : les élèves de l’application. Ils sont associés à une classe et un niveau d’études (CP, 6ème, Terminal etc…).
+-	Evaluations : il s’agit d’un examen, associé à une classe, un professeur, une date et un total de point (10, 20…)
+-	Result : Il s’agit d’une note qui est associée à un examen et un élève avec une note.
+Cette base de données est déjà remplie, vous n’aurez donc pas besoin de la remplir au préalable et vous pourrez ainsi tester très rapidement votre code.</p>

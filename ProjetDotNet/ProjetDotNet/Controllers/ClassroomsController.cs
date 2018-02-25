@@ -17,6 +17,8 @@ namespace ProjetDotNet.Controllers
         // GET: Classrooms
         public ActionResult Index()
         {
+            //List<Years> yearList = db.Years.ToList();
+            //ViewBag.YList = yearList;
             var classrooms = db.Classrooms.Include(c => c.Establishments).Include(c => c.Users).Include(c => c.Years);
             return View(classrooms.ToList());
         }
@@ -41,7 +43,7 @@ namespace ProjetDotNet.Controllers
         {
             ViewBag.Establishment_Id = new SelectList(db.Establishments, "Id", "Name");
             ViewBag.User_Id = new SelectList(db.Users, "Id", "UserName");
-            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Id");
+            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Year");
             return View();
         }
 
@@ -62,7 +64,7 @@ namespace ProjetDotNet.Controllers
 
             ViewBag.Establishment_Id = new SelectList(db.Establishments, "Id", "Name", classrooms.Establishment_Id);
             ViewBag.User_Id = new SelectList(db.Users, "Id", "UserName", classrooms.User_Id);
-            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Id", classrooms.Year_Id);
+            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Year", classrooms.Year_Id);
             return View(classrooms);
         }
 
@@ -80,7 +82,7 @@ namespace ProjetDotNet.Controllers
             }
             ViewBag.Establishment_Id = new SelectList(db.Establishments, "Id", "Name", classrooms.Establishment_Id);
             ViewBag.User_Id = new SelectList(db.Users, "Id", "UserName", classrooms.User_Id);
-            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Id", classrooms.Year_Id);
+            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Year", classrooms.Year_Id);
             return View(classrooms);
         }
 
@@ -99,7 +101,7 @@ namespace ProjetDotNet.Controllers
             }
             ViewBag.Establishment_Id = new SelectList(db.Establishments, "Id", "Name", classrooms.Establishment_Id);
             ViewBag.User_Id = new SelectList(db.Users, "Id", "UserName", classrooms.User_Id);
-            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Id", classrooms.Year_Id);
+            ViewBag.Year_Id = new SelectList(db.Years, "Id", "Year", classrooms.Year_Id);
             return View(classrooms);
         }
 

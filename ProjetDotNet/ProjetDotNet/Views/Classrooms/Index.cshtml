@@ -12,22 +12,27 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Establishments.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Years.Id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Establishment_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year_Id)
+        </th>
+        <th>
+            @Html.Label("Actions")
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Establishments.Name)
         </td>
@@ -35,10 +40,7 @@
             @Html.DisplayFor(modelItem => item.Users.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Years.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem => item.Years.Year)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

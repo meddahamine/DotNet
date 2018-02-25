@@ -8,7 +8,7 @@ namespace ProjetDotNet.Models
 
     public partial class Periods
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public Periods()
         {
             Evaluations = new HashSet<Evaluations>();
@@ -16,13 +16,16 @@ namespace ProjetDotNet.Models
 
         public Guid Id { get; set; }
 
+        [Display(Name = "Date debut")]
         public DateTime Begin { get; set; }
 
+        [Display(Name = "Date fin")]
         public DateTime End { get; set; }
 
+        [Display(Name = "Année")]
         public Guid Year_Id { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Evaluations> Evaluations { get; set; }
 
         public virtual Years Years { get; set; }

@@ -8,7 +8,7 @@ namespace ProjetDotNet.Models
 
     public partial class Levels
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public Levels()
         {
             Pupils = new HashSet<Pupils>();
@@ -18,13 +18,15 @@ namespace ProjetDotNet.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Niveau")]
         public string Title { get; set; }
 
+        [Display(Name = "Cycle")]
         public Guid Cycle_Id { get; set; }
 
         public virtual Cycles Cycles { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Pupils> Pupils { get; set; }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model ProjetDotNet.Models.Results
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Results</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Evaluations.Id)
+        </dt>
+
+        <dd>
+            <p>
+                @Html.DisplayFor(model => model.Evaluations.Id) |
+                @Html.ActionLink("Fiche Evaluation", "", "Evaluations/Details/" + Model.Evaluation_Id)
+            </p>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pupils.FirstName)
+        </dt>
+
+        <dd>
+            <p>
+                @Html.DisplayFor(model => model.Pupils.FirstName) |
+                @Html.ActionLink("Fiche Eleve", "", "Pupils/Details/" + Model.Pupil_Id)
+            </p>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

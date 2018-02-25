@@ -8,7 +8,7 @@ namespace ProjetDotNet.Models
 
     public partial class Tutors
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public Tutors()
         {
             Pupils = new HashSet<Pupils>();
@@ -18,36 +18,44 @@ namespace ProjetDotNet.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Nom")]
         public string LastName { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Prenom")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Adresse")]
         public string Address { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Code postal")]
         public string PostCode { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Ville")]
         public string Town { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Telephone")]
         public string Tel { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Email")]
         public string Mail { get; set; }
 
         [StringLength(1000)]
+        [Display(Name = "Commentaire")]
         public string Comment { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Pupils> Pupils { get; set; }
     }
 }

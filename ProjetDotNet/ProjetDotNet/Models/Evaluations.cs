@@ -8,7 +8,7 @@ namespace ProjetDotNet.Models
 
     public partial class Evaluations
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public Evaluations()
         {
             Results = new HashSet<Results>();
@@ -16,14 +16,19 @@ namespace ProjetDotNet.Models
 
         public Guid Id { get; set; }
 
+        [Display(Name = "Classe")]
         public Guid Classroom_Id { get; set; }
 
+        [Display(Name = "utilisateur")]
         public Guid User_Id { get; set; }
 
+        [Display(Name = "Periode")]
         public Guid Period_Id { get; set; }
 
+        [Display(Name = "Date")]
         public DateTime Date { get; set; }
 
+        [Display(Name = "Point total")]
         public int TotalPoint { get; set; }
 
         public virtual Classrooms Classrooms { get; set; }
@@ -32,7 +37,7 @@ namespace ProjetDotNet.Models
 
         public virtual Users Users { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Results> Results { get; set; }
     }
 }

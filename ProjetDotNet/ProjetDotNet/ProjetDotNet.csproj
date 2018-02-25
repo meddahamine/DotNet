@@ -154,8 +154,15 @@
     <Compile Include="Controllers\ClassroomsController.cs" />
     <Compile Include="Controllers\CyclesController.cs" />
     <Compile Include="Controllers\EstablishmentsController.cs" />
+    <Compile Include="Controllers\EvaluationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LevelsController.cs" />
+    <Compile Include="Controllers\PeriodsController.cs" />
+    <Compile Include="Controllers\PupilsController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
+    <Compile Include="Controllers\TutorsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\YearsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,6 +247,41 @@
     <Content Include="Views\Establishments\Details.cshtml" />
     <Content Include="Views\Establishments\Edit.cshtml" />
     <Content Include="Views\Establishments\Index.cshtml" />
+    <Content Include="Views\Pupils\Create.cshtml" />
+    <Content Include="Views\Pupils\Delete.cshtml" />
+    <Content Include="Views\Pupils\Details.cshtml" />
+    <Content Include="Views\Pupils\Edit.cshtml" />
+    <Content Include="Views\Pupils\Index.cshtml" />
+    <Content Include="Views\Evaluations\Create.cshtml" />
+    <Content Include="Views\Evaluations\Delete.cshtml" />
+    <Content Include="Views\Evaluations\Details.cshtml" />
+    <Content Include="Views\Evaluations\Edit.cshtml" />
+    <Content Include="Views\Evaluations\Index.cshtml" />
+    <Content Include="Views\Levels\Create.cshtml" />
+    <Content Include="Views\Levels\Delete.cshtml" />
+    <Content Include="Views\Levels\Details.cshtml" />
+    <Content Include="Views\Levels\Edit.cshtml" />
+    <Content Include="Views\Levels\Index.cshtml" />
+    <Content Include="Views\Periods\Create.cshtml" />
+    <Content Include="Views\Periods\Delete.cshtml" />
+    <Content Include="Views\Periods\Details.cshtml" />
+    <Content Include="Views\Periods\Edit.cshtml" />
+    <Content Include="Views\Periods\Index.cshtml" />
+    <Content Include="Views\Tutors\Create.cshtml" />
+    <Content Include="Views\Tutors\Delete.cshtml" />
+    <Content Include="Views\Tutors\Details.cshtml" />
+    <Content Include="Views\Tutors\Edit.cshtml" />
+    <Content Include="Views\Tutors\Index.cshtml" />
+    <Content Include="Views\Results\Create.cshtml" />
+    <Content Include="Views\Results\Delete.cshtml" />
+    <Content Include="Views\Results\Details.cshtml" />
+    <Content Include="Views\Results\Edit.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Years\Create.cshtml" />
+    <Content Include="Views\Years\Delete.cshtml" />
+    <Content Include="Views\Years\Details.cshtml" />
+    <Content Include="Views\Years\Edit.cshtml" />
+    <Content Include="Views\Years\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

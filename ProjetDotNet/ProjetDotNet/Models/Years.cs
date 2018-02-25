@@ -8,7 +8,7 @@ namespace ProjetDotNet.Models
 
     public partial class Years
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public Years()
         {
             Classrooms = new HashSet<Classrooms>();
@@ -17,12 +17,13 @@ namespace ProjetDotNet.Models
 
         public Guid Id { get; set; }
 
+        [Display(Name = "Année")]
         public int Year { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Classrooms> Classrooms { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Periods> Periods { get; set; }
     }
 }

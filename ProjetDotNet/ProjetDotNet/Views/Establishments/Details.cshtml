@@ -15,7 +15,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Academies.Name)
+            <p>
+                @Html.DisplayFor(model => model.Academies.Name) |
+                @Html.ActionLink("Fiche Academie", "", "Academies/Details/" + Model.Academie_Id)
+            </p>
         </dd>
 
         <dt>
@@ -23,7 +26,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Users.UserName)
+            <p>
+                @Html.DisplayFor(model => model.Users.UserName) |
+                @Html.ActionLink("Fiche Utilisateur", "", "Users/Details/" + Model.User_Id)
+            </p>
         </dd>
 
         <dt>
